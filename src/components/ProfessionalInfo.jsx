@@ -1,25 +1,43 @@
 import { useState } from "react";
 
-const ProfessionalInfo = () => {
-  const [jobTitle, setJobTitle] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
-  const [jobStart, setJobStart] = useState("");
-  const [jobEnd, setJobEnd] = useState("");
+const ProfessionalInfo = ({ professional, setProfessional }) => {
+  // const [jobTitle, setJobTitle] = useState("");
+  // const [companyName, setCompanyName] = useState("");
+  // const [jobDescription, setJobDescription] = useState("");
+  // const [jobStart, setJobStart] = useState("");
+  // const [jobEnd, setJobEnd] = useState("");
+  const [formProfessional, setFormProfessional] = useState({
+    jobTitle: "",
+    companyName: "",
+    jobDescription: "",
+    jobStart: "",
+    jobEnd: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(jobTitle);
-    console.log(companyName);
-    console.log(jobDescription);
-    console.log(jobStart);
-    console.log(jobEnd);
+    console.log("Antes de adicionar:", professional);
 
-    setJobTitle("");
-    setCompanyName("");
-    setJobDescription("");
-    setJobStart("");
-    setJobEnd("");
+    setProfessional((prev) => [
+      ...prev,
+      { ...formProfessional, id: crypto.randomUUID() },
+    ]);
+
+    setFormProfessional({
+      jobTitle: "",
+      companyName: "",
+      jobDescription: "",
+      jobStart: "",
+      jobEnd: "",
+    });
+
+    // setProfessional({
+    //   jobTitle: "",
+    //   companyName: "",
+    //   jobDescription: "",
+    //   jobStart: "",
+    //   jobEnd: "",
+    // });
   };
 
   return (
@@ -31,8 +49,13 @@ const ProfessionalInfo = () => {
           <input
             type="text"
             name="jobTitle"
-            value={jobTitle}
-            onChange={(e) => setJobTitle(e.target.value)}
+            value={formProfessional.jobTitle}
+            onChange={(e) =>
+              setFormProfessional({
+                ...formProfessional,
+                jobTitle: e.target.value,
+              })
+            }
           />
         </label>
         <label>
@@ -40,8 +63,13 @@ const ProfessionalInfo = () => {
           <input
             type="text"
             name="companyName"
-            value={companyName}
-            onChange={(e) => setCompanyName(e.target.value)}
+            value={formProfessional.companyName}
+            onChange={(e) =>
+              setFormProfessional({
+                ...formProfessional,
+                companyName: e.target.value,
+              })
+            }
           />
         </label>
         <label>
@@ -54,8 +82,13 @@ const ProfessionalInfo = () => {
         /> */}
           <textarea
             name="jobDescription"
-            onChange={(e) => setJobDescription(e.target.value)}
-            value={jobDescription}
+            value={formProfessional.jobDescription}
+            onChange={(e) =>
+              setFormProfessional({
+                ...formProfessional,
+                jobDescription: e.target.value,
+              })
+            }
           ></textarea>
         </label>
         <label>
@@ -63,8 +96,13 @@ const ProfessionalInfo = () => {
           <input
             type="date"
             name="jobStart"
-            value={jobStart}
-            onChange={(e) => setJobStart(e.target.value)}
+            value={formProfessional.jobStart}
+            onChange={(e) =>
+              setFormProfessional({
+                ...formProfessional,
+                jobStart: e.target.value,
+              })
+            }
           />
         </label>
         <label>
@@ -72,11 +110,16 @@ const ProfessionalInfo = () => {
           <input
             type="date"
             name="jobEnd"
-            value={jobEnd}
-            onChange={(e) => setJobEnd(e.target.value)}
+            value={formProfessional.jobEnd}
+            onChange={(e) =>
+              setFormProfessional({
+                ...formProfessional,
+                jobEnd: e.target.value,
+              })
+            }
           />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Add Professional Experience" />
       </div>
     </form>
   );

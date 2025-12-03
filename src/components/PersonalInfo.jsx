@@ -1,24 +1,16 @@
-import { useState } from "react";
+// import { useState } from "react";
 
-const PersonalInfo = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-
+const PersonalInfo = ({ personal, setPersonal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name);
-    console.log(email);
-    console.log(phone);
 
-    setName("");
-    setEmail("");
-    setPhone("");
+    console.log(personal);
+
+    // setName("");
+    // setEmail("");
+    // setPhone("");
+    // setPersonal({ name: "", email: "", phone: "" });
   };
-
-  // const handleName = (e) => {
-  //   setName(e.target.value);
-  // };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -29,8 +21,8 @@ const PersonalInfo = () => {
           <input
             type="text"
             name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={personal.name}
+            onChange={(e) => setPersonal({ ...personal, name: e.target.value })}
           />
         </label>
         <label>
@@ -38,8 +30,10 @@ const PersonalInfo = () => {
           <input
             type="email"
             name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={personal.email}
+            onChange={(e) =>
+              setPersonal({ ...personal, email: e.target.value })
+            }
           />
         </label>
         <label>
@@ -47,8 +41,10 @@ const PersonalInfo = () => {
           <input
             type="text"
             name="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={personal.phone}
+            onChange={(e) =>
+              setPersonal({ ...personal, phone: e.target.value })
+            }
           />
         </label>
         <input type="submit" value="Submit" />
