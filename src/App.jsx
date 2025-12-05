@@ -28,6 +28,14 @@ function App() {
     setEditingProfessional(null);
   };
 
+  const deleteEducation = (id) => {
+    setEducation((prev) => prev.filter((edu) => edu.id !== id));
+  };
+
+  const deleteProfessional = (id) => {
+    setProfessional((prev) => prev.filter((prof) => prof.id !== id));
+  };
+
   // const [editingEducationId, setEditingEducationId] = useState(null);
 
   // const handleEditEducation = (id, updatedEdu) => {
@@ -64,6 +72,8 @@ function App() {
         // }
         onEditEducation={setEditingEducation}
         onEditProfessional={setEditingProfessional}
+        onDeleteEducation={deleteEducation}
+        onDeleteProfessional={deleteProfessional}
       />
     </>
   );

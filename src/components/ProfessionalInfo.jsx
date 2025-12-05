@@ -5,13 +5,8 @@ const ProfessionalInfo = ({
   setProfessional,
   updateProfessional,
   editingProfessional,
-  setEditingProfessional,
+  // setEditingProfessional,
 }) => {
-  // const [jobTitle, setJobTitle] = useState("");
-  // const [companyName, setCompanyName] = useState("");
-  // const [jobDescription, setJobDescription] = useState("");
-  // const [jobStart, setJobStart] = useState("");
-  // const [jobEnd, setJobEnd] = useState("");
   const [formProfessional, setFormProfessional] = useState({
     jobTitle: "",
     companyName: "",
@@ -19,7 +14,6 @@ const ProfessionalInfo = ({
     jobStart: "",
     jobEnd: "",
   });
-  // const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     if (editingProfessional) {
@@ -51,16 +45,6 @@ const ProfessionalInfo = ({
       ]);
     }
 
-    // if (editingId) {
-    //   updateProfessional(editingId, { ...formProfessional, id: editingId });
-    //   setEditingId(null);
-    // } else {
-    //   setProfessional((prev) => [
-    //     ...prev,
-    //     { ...formProfessional, id: crypto.randomUUID() },
-    //   ]);
-    // }
-
     setFormProfessional({
       jobTitle: "",
       companyName: "",
@@ -69,11 +53,6 @@ const ProfessionalInfo = ({
       jobEnd: "",
     });
   };
-
-  // const handleEdit = (prof) => {
-  //   setFormProfessional(prof);
-  //   setEditingId(prof.id);
-  // };
 
   return (
     <div>

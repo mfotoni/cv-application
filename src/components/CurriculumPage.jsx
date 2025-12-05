@@ -4,6 +4,8 @@ const CurriculumPage = ({
   professional,
   onEditEducation,
   onEditProfessional,
+  onDeleteEducation,
+  onDeleteProfessional,
 }) => {
   return (
     <div id="curriculum-page">
@@ -25,15 +27,11 @@ const CurriculumPage = ({
             <li key={edu.id}>
               {edu.schoolName} - {edu.degree} - {edu.studyDate}
               <button onClick={() => onEditEducation(edu)}>Edit</button>
-              <button>Delete</button>
+              <button onClick={() => onDeleteEducation(edu.id)}>Delete</button>
             </li>
           ))}
         </ul>
       </div>
-      {/* <p>School Name:{education?.schoolName || "-"}</p>
-      <p>Degree:{education?.degree || "-"}</p>
-      <p>Study Date:{education?.studyDate || "-"}</p> */}
-      {/* renderize education info */}
       <div className="professional-display">
         <h3>Professional Experience</h3>
         <ul>
@@ -43,12 +41,13 @@ const CurriculumPage = ({
               <p> {prof.jobDescription} </p>
               {prof.jobStart} until: {prof.jobEnd}
               <button onClick={() => onEditProfessional(prof)}>Edit</button>
-              <button>Delete</button>
+              <button onClick={() => onDeleteProfessional(prof.id)}>
+                Delete
+              </button>
             </li>
           ))}
         </ul>
       </div>
-      {/* renderize professional info */}
     </div>
   );
 };

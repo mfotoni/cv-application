@@ -5,7 +5,7 @@ const EducationInfo = ({
   setEducation,
   updateEducation,
   editingEducation,
-  setEditingEducation,
+  // setEditingEducation,
 }) => {
   const [formEducation, setFormEducation] = useState({
     schoolName: "",
@@ -38,22 +38,12 @@ const EducationInfo = ({
       ]);
     }
 
-    // if (editingId) {
-    //   updateEducation(editingId, { ...formEducation, id: editingId });
-    //   setEditingId(null);
-    // } else {
-    //   setEducation((prev) => [
-    //     ...prev,
-    //     { ...formEducation, id: crypto.randomUUID() },
-    //   ]);
-    // }
-
     setFormEducation({ schoolName: "", degree: "", studyDate: "" });
   };
 
-  // const handleEdit = (edu) => {
-  //   setFormEducation(edu);
-  //   setEditingId(edu.id);
+  // const handleCancel = () => {
+  //   setFormEducation({ schoolName: "", degree: "", studyDate: "" });
+  //   setEditingEducation(null);
   // };
 
   return (
