@@ -57,11 +57,7 @@ const ProfessionalInfo = ({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <p>
-          {editingProfessional
-            ? "Edit Professional Experience"
-            : "Add Professional Experience"}
-        </p>
+        <p>Professional Experience</p>
         <label>
           <span>Job Title:</span>
           <input

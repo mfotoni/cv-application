@@ -11,6 +11,7 @@ function App() {
   const [education, setEducation] = useState([]);
   const [professional, setProfessional] = useState([]);
 
+  const [editingPersonal, setEditingPersonal] = useState(null);
   const [editingEducation, setEditingEducation] = useState(null);
   const [editingProfessional, setEditingProfessional] = useState(null);
 
@@ -36,18 +37,14 @@ function App() {
     setProfessional((prev) => prev.filter((prof) => prof.id !== id));
   };
 
-  // const [editingEducationId, setEditingEducationId] = useState(null);
-
-  // const handleEditEducation = (id, updatedEdu) => {
-  //   setEducation((prev) =>
-  //     prev.map((edu) => (edu.id === id ? { ...updatedEdu, id } : edu))
-  //   );
-  //   setEditingEducationId(null);
-  // };
-
   return (
     <>
-      <PersonalInfo personal={personal} setPersonal={setPersonal} />
+      <PersonalInfo
+        personal={personal}
+        setPersonal={setPersonal}
+        editingPersonal={editingPersonal}
+        setEditingPersonal={setEditingPersonal}
+      />
       <EducationInfo
         education={education}
         setEducation={setEducation}
@@ -66,10 +63,7 @@ function App() {
         personal={personal}
         education={education}
         professional={professional}
-        // onEditEducation={(id, updatedEdu) => updateEducation(id, updatedEdu)}
-        // onEditProfessional={(id, updatedProf) =>
-        //   updateProfessional(id, updatedProf)
-        // }
+        onEditPersonal={() => setEditingPersonal(true)}
         onEditEducation={setEditingEducation}
         onEditProfessional={setEditingProfessional}
         onDeleteEducation={deleteEducation}

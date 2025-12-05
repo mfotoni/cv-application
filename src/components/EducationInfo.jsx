@@ -12,7 +12,6 @@ const EducationInfo = ({
     degree: "",
     studyDate: "",
   });
-  // const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     if (editingEducation) {
@@ -41,15 +40,10 @@ const EducationInfo = ({
     setFormEducation({ schoolName: "", degree: "", studyDate: "" });
   };
 
-  // const handleCancel = () => {
-  //   setFormEducation({ schoolName: "", degree: "", studyDate: "" });
-  //   setEditingEducation(null);
-  // };
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <p>{editingEducation ? "Edit Education Info" : "Add Education"} </p>
+        <p>Education Info</p>
         <label>
           <span>School Name:</span>
           <input

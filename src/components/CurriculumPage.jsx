@@ -2,6 +2,7 @@ const CurriculumPage = ({
   personal,
   education,
   professional,
+  onEditPersonal,
   onEditEducation,
   onEditProfessional,
   onDeleteEducation,
@@ -16,8 +17,7 @@ const CurriculumPage = ({
         <p>Name: {personal?.name || "-"}</p>
         <p>E-mail: {personal?.email || "-"}</p>
         <p>Phone: {personal?.phone || "-"}</p>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={() => onEditPersonal()}>Edit</button>
       </div>
       {/* renderize personal info */}
       <div className="education-display">

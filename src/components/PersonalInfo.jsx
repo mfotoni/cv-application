@@ -1,28 +1,45 @@
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const PersonalInfo = ({ personal, setPersonal }) => {
+const PersonalInfo = ({
+  personal,
+  setPersonal,
+  editingPersonal,
+  setEditingPersonal,
+}) => {
+  const [formPersonal, setFormPersonal] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    if (editingPersonal) {
+      setFormPersonal(personal);
+    }
+  }, [editingPersonal, personal]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    setPersonal(formPersonal);
+    setEditingPersonal(false);
 
     console.log(personal);
-
-    // setName("");
-    // setEmail("");
-    // setPhone("");
-    // setPersonal({ name: "", email: "", phone: "" });
+    setFormPersonal({ name: "", email: "", phone: "" });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
+    <div>
+      <form onSubmit={handleSubmit}>
         <p> Personal Info</p>
         <label>
           <span>Name: </span>
           <input
             type="text"
             name="name"
-            value={personal.name}
-            onChange={(e) => setPersonal({ ...personal, name: e.target.value })}
+            value={formPersonal.name}
+            onChange={(e) =>
+              setFormPersonal({ ...formPersonal, name: e.target.value })
+            }
           />
         </label>
         <label>
@@ -30,9 +47,9 @@ const PersonalInfo = ({ personal, setPersonal }) => {
           <input
             type="email"
             name="email"
-            value={personal.email}
+            value={formPersonal.email}
             onChange={(e) =>
-              setPersonal({ ...personal, email: e.target.value })
+              setFormPersonal({ ...formPersonal, email: e.target.value })
             }
           />
         </label>
@@ -41,15 +58,15 @@ const PersonalInfo = ({ personal, setPersonal }) => {
           <input
             type="text"
             name="phone"
-            value={personal.phone}
+            value={formPersonal.phone}
             onChange={(e) =>
-              setPersonal({ ...personal, phone: e.target.value })
+              setFormPersonal({ ...formPersonal, phone: e.target.value })
             }
           />
         </label>
         <input type="submit" value="Submit" />
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
 
