@@ -1,32 +1,65 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const EducationInfo = ({ education, setEducation }) => {
+const EducationInfo = ({
+  education,
+  setEducation,
+  updateEducation,
+  editingEducation,
+  setEditingEducation,
+}) => {
   const [formEducation, setFormEducation] = useState({
     schoolName: "",
     degree: "",
     studyDate: "",
   });
+  // const [editingId, setEditingId] = useState(null);
+
+  useEffect(() => {
+    if (editingEducation) {
+      setFormEducation(editingEducation);
+    } else {
+      setFormEducation({ schoolName: "", degree: "", studyDate: "" });
+    }
+  }, [editingEducation]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Antes de adicionar:", education);
 
-    // setEducation((prev) => {
-    //   const newEducation = [...prev, { ...formEducation, id: Date.now() }];
-    //   console.log("Depois de adicionar:", newEducation); // debug
-    //   return newEducation;
-    // });
-    setEducation((prev) => [
-      ...prev,
-      { ...formEducation, id: crypto.randomUUID() },
-    ]);
+    if (editingEducation) {
+      updateEducation(editingEducation.id, {
+        ...formEducation,
+        id: editingEducation.id,
+      });
+    } else {
+      setEducation((prev) => [
+        ...prev,
+        { ...formEducation, id: crypto.randomUUID() },
+      ]);
+    }
+
+    // if (editingId) {
+    //   updateEducation(editingId, { ...formEducation, id: editingId });
+    //   setEditingId(null);
+    // } else {
+    //   setEducation((prev) => [
+    //     ...prev,
+    //     { ...formEducation, id: crypto.randomUUID() },
+    //   ]);
+    // }
+
     setFormEducation({ schoolName: "", degree: "", studyDate: "" });
   };
 
+  // const handleEdit = (edu) => {
+  //   setFormEducation(edu);
+  //   setEditingId(edu.id);
+  // };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <p>Education Info</p>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <p>{editingEducation ? "Edit Education Info" : "Add Education"} </p>
         <label>
           <span>School Name:</span>
           <input
@@ -60,9 +93,12 @@ const EducationInfo = ({ education, setEducation }) => {
             }
           />
         </label>
-        <input type="submit" value="Add Education" />
-      </div>
-    </form>
+        <input
+          type="submit"
+          value={editingEducation ? "Update Education" : "Add Education"}
+        />
+      </form>
+    </div>
   );
 };
 

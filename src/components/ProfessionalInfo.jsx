@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const ProfessionalInfo = ({ professional, setProfessional }) => {
+const ProfessionalInfo = ({
+  professional,
+  setProfessional,
+  updateProfessional,
+  editingProfessional,
+  setEditingProfessional,
+}) => {
   // const [jobTitle, setJobTitle] = useState("");
   // const [companyName, setCompanyName] = useState("");
   // const [jobDescription, setJobDescription] = useState("");
@@ -13,15 +19,47 @@ const ProfessionalInfo = ({ professional, setProfessional }) => {
     jobStart: "",
     jobEnd: "",
   });
+  // const [editingId, setEditingId] = useState(null);
+
+  useEffect(() => {
+    if (editingProfessional) {
+      setFormProfessional(editingProfessional);
+    } else {
+      setFormProfessional({
+        jobTitle: "",
+        companyName: "",
+        jobDescription: "",
+        jobStart: "",
+        jobEnd: "",
+      });
+    }
+  }, [editingProfessional]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Antes de adicionar:", professional);
 
-    setProfessional((prev) => [
-      ...prev,
-      { ...formProfessional, id: crypto.randomUUID() },
-    ]);
+    if (editingProfessional) {
+      updateProfessional(editingProfessional.id, {
+        ...formProfessional,
+        id: editingProfessional.id,
+      });
+    } else {
+      setProfessional((prev) => [
+        ...prev,
+        { ...formProfessional, id: crypto.randomUUID() },
+      ]);
+    }
+
+    // if (editingId) {
+    //   updateProfessional(editingId, { ...formProfessional, id: editingId });
+    //   setEditingId(null);
+    // } else {
+    //   setProfessional((prev) => [
+    //     ...prev,
+    //     { ...formProfessional, id: crypto.randomUUID() },
+    //   ]);
+    // }
 
     setFormProfessional({
       jobTitle: "",
@@ -30,20 +68,21 @@ const ProfessionalInfo = ({ professional, setProfessional }) => {
       jobStart: "",
       jobEnd: "",
     });
-
-    // setProfessional({
-    //   jobTitle: "",
-    //   companyName: "",
-    //   jobDescription: "",
-    //   jobStart: "",
-    //   jobEnd: "",
-    // });
   };
 
+  // const handleEdit = (prof) => {
+  //   setFormProfessional(prof);
+  //   setEditingId(prof.id);
+  // };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <p>Professional Experience</p>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <p>
+          {editingProfessional
+            ? "Edit Professional Experience"
+            : "Add Professional Experience"}
+        </p>
         <label>
           <span>Job Title:</span>
           <input
@@ -119,9 +158,16 @@ const ProfessionalInfo = ({ professional, setProfessional }) => {
             }
           />
         </label>
-        <input type="submit" value="Add Professional Experience" />
-      </div>
-    </form>
+        <input
+          type="submit"
+          value={
+            editingProfessional
+              ? "Update Professional Experience"
+              : "Add Professional Experience"
+          }
+        />
+      </form>
+    </div>
   );
 };
 
