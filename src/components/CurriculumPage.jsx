@@ -18,6 +18,7 @@ const CurriculumPage = ({
         <p>E-mail: {personal?.email || "-"}</p>
         <p>Phone: {personal?.phone || "-"}</p>
         <button onClick={() => onEditPersonal()}>Edit</button>
+        <hr />
       </div>
       {/* renderize personal info */}
       <div className="education-display">
@@ -31,6 +32,7 @@ const CurriculumPage = ({
             </li>
           ))}
         </ul>
+        <hr />
       </div>
       <div className="professional-display">
         <h3>Professional Experience</h3>
@@ -47,6 +49,7 @@ const CurriculumPage = ({
             </li>
           ))}
         </ul>
+        <hr />
       </div>
     </div>
   );

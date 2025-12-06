@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const EducationInfo = ({
   education,
@@ -12,10 +12,14 @@ const EducationInfo = ({
     degree: "",
     studyDate: "",
   });
+  const schoolNameInputRef = useRef(null);
 
   useEffect(() => {
     if (editingEducation) {
       setFormEducation(editingEducation);
+      setTimeout(() => {
+        schoolNameInputRef.current?.focus();
+      }, 0);
     } else {
       setFormEducation({ schoolName: "", degree: "", studyDate: "" });
     }
@@ -47,12 +51,14 @@ const EducationInfo = ({
         <label>
           <span>School Name:</span>
           <input
+            ref={schoolNameInputRef}
             type="text"
             name="schoolName"
             value={formEducation.schoolName}
             onChange={(e) =>
               setFormEducation({ ...formEducation, schoolName: e.target.value })
             }
+            required
           />
         </label>
         <label>
@@ -64,6 +70,7 @@ const EducationInfo = ({
             onChange={(e) =>
               setFormEducation({ ...formEducation, degree: e.target.value })
             }
+            required
           />
         </label>
         <label>
@@ -75,6 +82,7 @@ const EducationInfo = ({
             onChange={(e) =>
               setFormEducation({ ...formEducation, studyDate: e.target.value })
             }
+            required
           />
         </label>
         <input

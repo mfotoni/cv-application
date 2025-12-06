@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const PersonalInfo = ({
   personal,
@@ -11,10 +11,14 @@ const PersonalInfo = ({
     email: "",
     phone: "",
   });
+  const nameInputRef = useRef(null);
 
   useEffect(() => {
     if (editingPersonal) {
       setFormPersonal(personal);
+      setTimeout(() => {
+        nameInputRef.current?.focus();
+      }, 0);
     }
   }, [editingPersonal, personal]);
 
@@ -34,12 +38,14 @@ const PersonalInfo = ({
         <label>
           <span>Name: </span>
           <input
+            ref={nameInputRef}
             type="text"
             name="name"
             value={formPersonal.name}
             onChange={(e) =>
               setFormPersonal({ ...formPersonal, name: e.target.value })
             }
+            required
           />
         </label>
         <label>
@@ -51,6 +57,7 @@ const PersonalInfo = ({
             onChange={(e) =>
               setFormPersonal({ ...formPersonal, email: e.target.value })
             }
+            required
           />
         </label>
         <label>
@@ -62,6 +69,7 @@ const PersonalInfo = ({
             onChange={(e) =>
               setFormPersonal({ ...formPersonal, phone: e.target.value })
             }
+            required
           />
         </label>
         <input type="submit" value="Submit" />

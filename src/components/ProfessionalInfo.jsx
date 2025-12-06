@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const ProfessionalInfo = ({
   professional,
@@ -18,6 +18,9 @@ const ProfessionalInfo = ({
   useEffect(() => {
     if (editingProfessional) {
       setFormProfessional(editingProfessional);
+      setTimeout(() => {
+        jobTitleInputRef.current?.focus();
+      }, 0);
     } else {
       setFormProfessional({
         jobTitle: "",
@@ -28,6 +31,7 @@ const ProfessionalInfo = ({
       });
     }
   }, [editingProfessional]);
+  const jobTitleInputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,6 +65,7 @@ const ProfessionalInfo = ({
         <label>
           <span>Job Title:</span>
           <input
+            ref={jobTitleInputRef}
             type="text"
             name="jobTitle"
             value={formProfessional.jobTitle}
@@ -70,6 +75,7 @@ const ProfessionalInfo = ({
                 jobTitle: e.target.value,
               })
             }
+            required
           />
         </label>
         <label>
@@ -84,6 +90,7 @@ const ProfessionalInfo = ({
                 companyName: e.target.value,
               })
             }
+            required
           />
         </label>
         <label>
@@ -103,6 +110,7 @@ const ProfessionalInfo = ({
                 jobDescription: e.target.value,
               })
             }
+            required
           ></textarea>
         </label>
         <label>
@@ -117,6 +125,7 @@ const ProfessionalInfo = ({
                 jobStart: e.target.value,
               })
             }
+            required
           />
         </label>
         <label>
@@ -131,6 +140,7 @@ const ProfessionalInfo = ({
                 jobEnd: e.target.value,
               })
             }
+            required
           />
         </label>
         <input
